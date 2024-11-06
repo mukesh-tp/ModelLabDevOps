@@ -6,19 +6,34 @@ pipeline {
                 git url: 'https://github.com/mukesh-tp/ModelLabDevOps.git', branch: 'master'
             }
         }
-        stage('Build with Maven') {
+        stage('Clean') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean'
+            }
+        }
+        stage('Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage('Verify') {
+            steps {
+                sh 'mvn verify'
             }
         }
         stage('Docker Build') {
             steps {
                 sh 'docker build -t my-java-app .'
-            }
-        }
-        stage('Run Tests') {
-            steps {
-                sh 'mvn test'
             }
         }
         stage('Run Application') {
@@ -33,3 +48,4 @@ pipeline {
         }
     }
 }
+
