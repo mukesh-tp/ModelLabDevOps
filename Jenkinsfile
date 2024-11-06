@@ -33,12 +33,12 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'docker build -t my-java-app .'
+                sh 'sudo docker build -t my-java-app .'
             }
         }
         stage('Run Application') {
             steps {
-                sh 'docker run --rm my-java-app'
+                sh 'sudo docker run --rm my-java-app'
             }
         }
     }
